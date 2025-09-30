@@ -1,7 +1,7 @@
 // frontend/src/components/GameBoard.jsx
 import React, { useState } from "react";
 import "../styles/GameBoard.css";
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from "../config"; // import backend URL
 
 export default function GameBoard({ game, setGame }) {
   const [selectedPile, setSelectedPile] = useState(null);
@@ -9,7 +9,7 @@ export default function GameBoard({ game, setGame }) {
 
   const makeMove = async () => {
     if (selectedPile === null) return;
-    const res = await fetch(`/api/move/${game.game_id}`, {
+    const res = await fetch(`${BACKEND_URL}/api/move/${game.game_id}`, { // <-- updated
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ pile: selectedPile, count: parseInt(removeCount) })
@@ -24,7 +24,7 @@ export default function GameBoard({ game, setGame }) {
   };
 
   const aiMove = async () => {
-    const res = await fetch(`/api/ai-move/${game.game_id}`, { method: "POST" });
+    const res = await fetch(`${BACKEND_URL}/api/ai-move/${game.game_id}`, { method: "POST" }); // <-- updated
     const data = await res.json();
     if (res.ok) {
       setGame(prev => ({ ...prev, state: data.state }));
@@ -44,7 +44,6 @@ export default function GameBoard({ game, setGame }) {
           onClick={() => { setSelectedPile(i); setRemoveCount(1); }}
         >
           <div>Pile {i}</div>
-          {/* Show counters instead of plain number */}
           <div>
             {Array.from({ length: count }).map((_, idx) => (
               <div key={idx} className="counter"></div>
