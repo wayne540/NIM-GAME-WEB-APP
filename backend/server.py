@@ -94,4 +94,53 @@ def ai_move(game_id):
     """Let the AI make a move."""
     game_data = GAMES.get(game_id)
     if not game_data:
-        return jsonify({"er
+        return jsonify({"error": "Game not found"}), 404
+
+    game = game_data["game"]
+    move = AI.choose_action(game.piles, epsilon=False)
+    game.move(move)
+
+    # Check for winner
+    if game.winner is not None:
+        game_data["winner"] = 0 if game_data["player"] == 1 else 1
+
+    # Switch turns
+    game_data["player"] = 1 if game_data["player"] == 0 else 0
+
+    return jsonify({
+        "move": move,
+        "state": game.piles,
+        "player": game_data["player"],
+        "winner": game_data["winner"]
+    })
+
+
+@app.route("/api/train", methods=["POST"])
+def train_ai():
+    """Retrain the AI and save it."""
+    global AI
+    AI = train(10000)
+    with open(AI_FILE, "wb") as f:
+        pickle.dump(AI, f)
+    return jsonify({"status": "AI trained and saved"})
+
+
+# -----------------------------
+# Frontend (React build serving)
+# -----------------------------
+
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve(path):
+    """Serve React frontend."""
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    return send_from_directory(app.static_folder, "index.html")
+
+
+# -----------------------------
+# Run
+# -----------------------------
+if __name__ == "__main__":
+    app.run(debug=True)
+
