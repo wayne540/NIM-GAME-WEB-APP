@@ -1,19 +1,27 @@
 from PIL import Image, ImageDraw
 import os
 
-# Path where favicon will be saved (frontend/public)
-output_path = os.path.join("frontend", "public", "favicon.png")
+# Paths
+output_large = os.path.join("frontend", "public", "favicon.png")
+output_small = os.path.join("frontend", "public", "favicon-32.png")
 
-# Create blank image
-img = Image.new("RGB", (256, 256), color=(30, 30, 30))  # dark background
-draw = ImageDraw.Draw(img)
+def create_favicon(size, path):
+    img = Image.new("RGB", (size, size), color=(30, 30, 30))  # dark background
+    draw = ImageDraw.Draw(img)
 
-# Circle positions
-positions = [(128, 60), (80, 160), (176, 160)]
-for x, y in positions:
-    draw.ellipse((x-30, y-30, x+30, y+30), fill=(230, 230, 230))  # light counters
+    # Scale circle positions and radius based on size
+    scale = size / 256
+    positions = [(128, 60), (80, 160), (176, 160)]
+    radius = int(30 * scale)
+    for x, y in positions:
+        x_scaled = int(x * scale)
+        y_scaled = int(y * scale)
+        draw.ellipse((x_scaled-radius, y_scaled-radius, x_scaled+radius, y_scaled+radius), fill=(230, 230, 230))
 
-# Save image
-os.makedirs(os.path.dirname(output_path), exist_ok=True)
-img.save(output_path)
-print(f"✅ Favicon saved at {output_path}")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    img.save(path)
+    print(f"✅ Favicon saved at {path}")
+
+# Generate both sizes
+create_favicon(256, output_large)
+create_favicon(32, output_small)
