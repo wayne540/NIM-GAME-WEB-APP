@@ -1,6 +1,8 @@
 // frontend/src/components/Menu.jsx
 import React, { useState } from "react";
 import "../styles/Menu.css";
+import { BACKEND_URL } from "../config";
+
 
 export default function Menu({ onCreate }) {
   const [initial, setInitial] = useState("1,3,5,7");
