@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Menu from "./components/Menu";
 import GameBoard from "./components/GameBoard";
 import HUD from "./components/HUD";
+import "./styles/global.css"; // make sure global styles are applied
 
 function App() {
   const [page, setPage] = useState("menu"); // "menu" or "game"
@@ -20,8 +21,8 @@ function App() {
       )}
 
       {page === "game" && game && (
-        <div>
-          <button onClick={() => setPage("menu")} style={{ margin: 8 }}>
+        <div className="game-page">
+          <button className="back-button" onClick={() => setPage("menu")}>
             ← Back
           </button>
           <HUD game={game} setGame={setGame} />
