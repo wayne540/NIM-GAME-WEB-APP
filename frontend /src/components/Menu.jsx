@@ -1,8 +1,7 @@
 // frontend/src/components/Menu.jsx
 import React, { useState } from "react";
 import "../styles/Menu.css";
-import { BACKEND_URL } from "../config";
-
+import { BACKEND_URL } from "../config"; // import backend URL
 
 export default function Menu({ onCreate }) {
   const [initial, setInitial] = useState("1,3,5,7");
@@ -12,7 +11,7 @@ export default function Menu({ onCreate }) {
   const createGame = async () => {
     const arr = initial.split(",").map((s) => parseInt(s.trim())).filter(n => !isNaN(n));
     const body = { initial: arr, mode, ai_player: aiPlayer };
-    const res = await fetch("/api/new-game", {
+    const res = await fetch(`${BACKEND_URL}/api/new-game`, { // <-- updated
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body)
