@@ -1,6 +1,6 @@
 // frontend/src/components/Menu.jsx
 import React, { useState } from "react";
-import "../styles/GameBoard.css";
+import "../styles/Menu.css";
 
 export default function Menu({ onCreate }) {
   const [initial, setInitial] = useState("1,3,5,7");
@@ -20,11 +20,11 @@ export default function Menu({ onCreate }) {
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Nim — Create Game</h2>
+    <div className="menu">
+      <h2>Create a New Game</h2>
       <label>Initial piles (comma separated)</label>
       <br />
-      <input value={initial} onChange={e => setInitial(e.target.value)} style={{ width: 300 }} />
+      <input value={initial} onChange={e => setInitial(e.target.value)} />
       <br />
       <label>Mode</label>
       <br />
@@ -35,7 +35,10 @@ export default function Menu({ onCreate }) {
       <br />
       <label>AI Player</label>
       <br />
-      <select value={aiPlayer ?? ""} onChange={e => setAiPlayer(e.target.value === "" ? null : parseInt(e.target.value))}>
+      <select
+        value={aiPlayer ?? ""}
+        onChange={e => setAiPlayer(e.target.value === "" ? null : parseInt(e.target.value))}
+      >
         <option value="">None (local/multiplayer)</option>
         <option value={0}>AI is Player 0 (goes first)</option>
         <option value={1}>AI is Player 1 (goes second)</option>
