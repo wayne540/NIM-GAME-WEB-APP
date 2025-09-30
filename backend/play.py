@@ -1,8 +1,16 @@
-# backend/play_and_save.py
+# backend/play.py
 from nim import train
-import pickle, os
+import pickle
+import os
 
-ai = train(10000)
-with open("nim_ai.pkl", "wb") as f:
+# Ensure the model directory exists
+MODEL_FILE = os.path.join("backend", "nim_ai.pkl")
+
+print("⚙️ Training Nim AI... This may take a moment.")
+ai = train(10000)  # Train the AI with 10,000 games
+
+# Save the trained model
+with open(MODEL_FILE, "wb") as f:
     pickle.dump(ai, f)
-print("Saved nim_ai.pkl")
+
+print(f"✅ Nim AI trained and saved at {MODEL_FILE}")
