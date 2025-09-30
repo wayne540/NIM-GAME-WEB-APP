@@ -1,5 +1,6 @@
 // frontend/src/components/Menu.jsx
 import React, { useState } from "react";
+import "../styles/GameBoard.css";
 
 export default function Menu({ onCreate }) {
   const [initial, setInitial] = useState("1,3,5,7");
