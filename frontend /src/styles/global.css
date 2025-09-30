@@ -7,16 +7,55 @@
 
 /* Apply a modern font */
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f8f9fa;
+  font-family: "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
+  background-color: #f4f6f8;
   color: #222;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Root app container */
 #root {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
+  padding: 20px;
+}
+
+/* Headings */
+h1, h2, h3 {
+  color: #0077cc;
+  font-weight: 600;
+}
+
+/* Buttons (default style) */
+button {
+  font-family: inherit;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Inputs */
+input, select {
+  font-family: inherit;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: #0077cc;
 }
