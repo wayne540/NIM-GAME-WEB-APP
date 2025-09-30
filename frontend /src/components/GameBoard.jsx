@@ -1,5 +1,6 @@
 // frontend/src/components/GameBoard.jsx
 import React, { useState } from "react";
+import "../styles/GameBoard.css";
 
 export default function GameBoard({ game, setGame }) {
   const [selectedPile, setSelectedPile] = useState(null);
