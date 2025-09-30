@@ -1,0 +1,17 @@
+.hud {
+  margin-top: 20px;
+  padding: 10px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.hud h2 {
+  margin-bottom: 10px;
+}
+
+.hud .status {
+  font-weight: bold;
+  color: #0077cc;
+}
