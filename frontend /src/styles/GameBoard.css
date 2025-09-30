@@ -1,5 +1,7 @@
 .game-board {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 2rem;
   margin-top: 2rem;
 }
@@ -8,6 +10,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.pile.selected {
+  background: #eef;
+  border-color: #0077cc;
 }
 
 .counter {
@@ -22,5 +35,31 @@
 
 .counter:hover {
   transform: scale(1.1);
+}
+
+.controls {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.controls input {
+  margin-top: 5px;
+  padding: 5px;
+  width: 60px;
+  text-align: center;
+}
+
+.controls button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background: #0077cc;
+  color: white;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.controls button:hover {
+  background: #005fa3;
 }
