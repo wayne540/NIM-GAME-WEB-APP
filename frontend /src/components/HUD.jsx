@@ -1,5 +1,6 @@
 // frontend/src/components/HUD.jsx
 import React from "react";
+import "../styles/GameBoard.css";
 
 export default function HUD({ game }) {
   const state = game.state;
