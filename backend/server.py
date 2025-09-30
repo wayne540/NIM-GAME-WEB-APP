@@ -1,7 +1,6 @@
 # backend/server.py
 import os
 import uuid
-import random
 import pickle
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
@@ -14,12 +13,14 @@ CORS(app)
 # Store games in memory
 GAMES = {}
 
+# Make sure AI file path is consistent with play.py
+AI_FILE = os.path.join("backend", "nim_ai.pkl")
+
 # Load AI if exists, otherwise create a fresh one
-AI_FILE = "nim_ai.pkl"
 if os.path.exists(AI_FILE):
     with open(AI_FILE, "rb") as f:
         AI = pickle.load(f)
-    print("✅ Loaded pre-trained AI from nim_ai.pkl")
+    print(f"✅ Loaded pre-trained AI from {AI_FILE}")
 else:
     AI = NimAI()
     print("⚡ No pre-trained AI found, using fresh AI")
@@ -122,7 +123,7 @@ def train_ai():
     AI = train(10000)
     with open(AI_FILE, "wb") as f:
         pickle.dump(AI, f)
-    return jsonify({"status": "AI trained and saved"})
+    return jsonify({"status": f"AI trained and saved at {AI_FILE}"})
 
 
 # -----------------------------
@@ -143,4 +144,3 @@ def serve(path):
 # -----------------------------
 if __name__ == "__main__":
     app.run(debug=True)
-
